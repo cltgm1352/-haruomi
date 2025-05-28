@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>????|HARUOMILABO</title>
+  <title>Image Display with Custom Cursor and Toggle View</title>
   <style>
     body {
       margin: 0;
@@ -28,8 +28,8 @@
     }
 
     .center-image {
-      width: 50%;
-      max-width: 584px;
+      width: 40%;
+      max-width: 467px;
       transition: transform 0.3s ease;
     }
 
@@ -64,20 +64,89 @@
     .hidden {
       display: none;
     }
+
+    .content-view {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .content-view.active {
+      display: flex;
+    }
+
+    .content-image {
+      width: 40%;
+      max-width: 467px;
+      margin-right: 20px;
+    }
+
+    .content-image:hover {
+      transform: scale(1.2);
+      cursor: url('https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/937ef075e97c626af9cc1b647b1283bf_036ea7260c64428c8a01ea81d6db2c6e.png?width=1168') 50 50, auto;
+    }
+
+    .text-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .text-content h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .text-content p {
+      font-size: 1.2em;
+    }
   </style>
 </head>
 <body>
   <div class="loader" id="loader">
     <img src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Loading">
   </div>
-  <div class="container">
-    <img class="center-image" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Center Image">
+  <div class="container" id="mainView">
+    <img class="center-image" id="centerImage" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Center Image">
+  </div>
+  <div class="content-view" id="contentView">
+    <img class="content-image" id="contentImage" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Content Image">
+    <div class="text-content">
+      <h1>？？？？</h1>
+      <p>？？？？</p>
+    </div>
   </div>
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loader').classList.add('hidden');
       }, 2000);
+    });
+
+    const mainView = document.getElementById('mainView');
+    const contentView = document.getElementById('contentView');
+    const centerImage = document.getElementById('centerImage');
+    const contentImage = document.getElementById('contentImage');
+
+    centerImage.addEventListener('click', () => {
+      mainView.classList.add('hidden');
+      contentView.classList.add('active');
+      document.body.style.backgroundImage = 'none';
+      document.body.style.backgroundColor = 'white';
+    });
+
+    contentImage.addEventListener('click', () => {
+      contentView.classList.remove('active');
+      mainView.classList.remove('hidden');
+      document.body.style.backgroundColor = '';
+      document.body.style.backgroundImage = "url('https://farm1.static.flickr.com/89/397581862_3ab3287ef9_o.jpg')";
     });
   </script>
 </body>
