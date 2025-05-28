@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>？？？？HARUOMILABO</title>
+  <title>Image Display with Custom Cursor and Toggle View</title>
   <style>
     body {
       margin: 0;
@@ -75,6 +75,7 @@
       justify-content: center;
       padding: 20px;
       box-sizing: border-box;
+      position: relative;
     }
 
     .content-view.active {
@@ -107,6 +108,23 @@
     .text-content p {
       font-size: 1.2em;
     }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: black;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+
+    .close-button:hover {
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -117,6 +135,7 @@
     <img class="center-image" id="centerImage" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Center Image">
   </div>
   <div class="content-view" id="contentView">
+    <button class="close-button" id="closeButton">×</button>
     <img class="content-image" id="contentImage" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/2762588/e59c1530bc677b8391fcb90f014a5fe2_b7b52939886883467e95ef79443a0a7a.png?width=1168" alt="Content Image">
     <div class="text-content">
       <h1>？？？？</h1>
@@ -134,6 +153,7 @@
     const contentView = document.getElementById('contentView');
     const centerImage = document.getElementById('centerImage');
     const contentImage = document.getElementById('contentImage');
+    const closeButton = document.getElementById('closeButton');
 
     centerImage.addEventListener('click', () => {
       mainView.classList.add('hidden');
@@ -143,6 +163,13 @@
     });
 
     contentImage.addEventListener('click', () => {
+      contentView.classList.remove('active');
+      mainView.classList.remove('hidden');
+      document.body.style.backgroundColor = '';
+      document.body.style.backgroundImage = "url('https://farm1.static.flickr.com/89/397581862_3ab3287ef9_o.jpg')";
+    });
+
+    closeButton.addEventListener('click', () => {
       contentView.classList.remove('active');
       mainView.classList.remove('hidden');
       document.body.style.backgroundColor = '';
